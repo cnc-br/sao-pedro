@@ -11,6 +11,30 @@ jobs:
     name: Deploy to AppServer
     runs-on: ubuntu-latest
     steps:
+      - name: Validar Segredos
+        run: |
+          echo "Verificando presenca dos segredos em sao-pedro..."
+          STATUS=0
+          if [ -z "${{ secrets.SSH_HOST }}" ]; then
+            echo "::error::Secret 'SSH_HOST' esta ausente no repositorio sao-pedro!"
+            STATUS=1
+          else
+            echo "SSH_HOST: presente"
+          fi
+          if [ -z "${{ secrets.SSH_USER }}" ]; then
+            echo "::error::Secret 'SSH_USER' esta ausente no repositorio sao-pedro!"
+            STATUS=1
+          else
+            echo "SSH_USER: presente"
+          fi
+          if [ -z "${{ secrets.SSH_KEY }}" ]; then
+            echo "::error::Secret 'SSH_KEY' esta ausente no repositorio sao-pedro!"
+            STATUS=1
+          else
+            echo "SSH_KEY: presente"
+          fi
+          exit $STATUS
+
       - name: Executar deploy no AppServer
         uses: appleboy/ssh-action@v1.2.0
         with:
