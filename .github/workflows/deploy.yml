@@ -1,0 +1,22 @@
+name: Deploy sao-pedro
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy to AppServer
+    runs-on: ubuntu-latest
+    steps:
+      - name: Executar deploy no AppServer
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT || 22 }}
+          script: |
+            /opt/cnc/scripts/deploy-sao-pedro.sh
