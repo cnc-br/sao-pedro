@@ -7,7 +7,8 @@ from .serializers import PessoaSerializer
 
 
 class PessoaViewSet(viewsets.ModelViewSet):
-    queryset = Pessoa.objects.all().order_by("-id")
+    queryset = Pessoa.objects.prefetch_related(
+        "enderecos", "contatos").order_by("-id")
     serializer_class = PessoaSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = PessoaFilter

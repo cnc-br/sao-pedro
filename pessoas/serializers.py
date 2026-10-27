@@ -1,10 +1,11 @@
 from rest_framework import serializers
 
+from contatos.serializers import ContatoSerializer
 from enderecos.serializers import EnderecoSerializer
 from .models import Pessoa
 
 
-class PessoaSerializer(serializers.ModelSerializer):
+class PessoaInfoSerializer(serializers.ModelSerializer):
     enderecos = EnderecoSerializer(many=True, read_only=True)
 
     class Meta:
@@ -24,6 +25,13 @@ class PessoaSerializer(serializers.ModelSerializer):
             "enderecos",
             "ativo",
         ]
+
+
+class PessoaSerializer(PessoaInfoSerializer):
+    contatos = ContatoSerializer(many=True, read_only=True)
+
+    class Meta(PessoaInfoSerializer.Meta):
+        fields = PessoaInfoSerializer.Meta.fields + ["contatos"]
 
     def validate_cpf(self, value):
         """

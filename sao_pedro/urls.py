@@ -23,16 +23,23 @@ from enderecos.views import EnderecoViewSet
 from health.views import HealthCheckView
 from health.views import WelcomeView  # importa a view do app health
 from pessoas.views import PessoaViewSet
+from contatos.views import ContatoViewSet, PessoaContatoView
 
 router = DefaultRouter()
 router.register(r"pessoas", PessoaViewSet)
 router.register(r"enderecos", EnderecoViewSet)
+router.register(r"contatos", ContatoViewSet)
 
 urlpatterns = [
     path('', WelcomeView.as_view(), name='welcome'),
     path('admin/', admin.site.urls),
     path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    path(
+        "api/pessoas/<uuid:uuid>/contatos/",
+        PessoaContatoView.as_view(),
+        name="pessoa-contatos",
+    ),
     path("api/", include(router.urls)),
     path("api/health/", HealthCheckView.as_view(), name="health_check"),
 ]

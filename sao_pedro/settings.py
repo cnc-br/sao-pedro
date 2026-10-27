@@ -53,6 +53,7 @@ INSTALLED_APPS = [
 
     'pessoas',
     'enderecos',
+    'contatos',
     'health',
 ]
 
