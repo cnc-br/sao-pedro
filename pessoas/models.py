@@ -14,6 +14,7 @@ class Pessoa(models.Model):
         ("C", "Casado"),
         ("D", "Divorciado"),
         ("V", "Viúvo"),
+        ("N", "Não Informado"),
     ]
 
     ESCOLARIDADE = [
