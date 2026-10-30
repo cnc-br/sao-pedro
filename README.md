@@ -1,6 +1,20 @@
 # São Pedro
 API de Pessoas
 
+## Como executar
+
+Inicie os serviços Docker:
+
+```bash
+docker compose up -d --remove-orphans
+```
+
+Em seguida, execute a aplicação:
+
+```bash
+make run
+```
+
 ## Pessoas
 Cadastro de pessoas. O detalhe `GET /api/pessoas/{uuid}/` inclui a lista de `contatos` da pessoa, além dos `enderecos`.
 
