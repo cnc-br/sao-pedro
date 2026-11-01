@@ -1,0 +1,9 @@
+# Cursor Rules — São Pedro (Identidade CNC-Gestão)
+
+- Stack: Django 5.2, DRF, SimpleJWT, Python 3.12+, PostgreSQL 17.
+- Governança Canônica: Consulte gestao-devsecops/specs/004-identidade-saopedro/SPEC.md.
+- Regras:
+  1. TDD Obrigatório: Escreva testes com APITestCase ou TestCase antes de alterar models/views.
+  2. Zero Hardcoded Secrets: Use django-environ e .env.example.
+  3. LGPD & Schema: Todo model reside no schema 'saopedro' do banco 'db_gestao'.
+  4. Valide migrations com: python manage.py makemigrations --check --dry-run.
